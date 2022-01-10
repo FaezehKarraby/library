@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{ book.name }}{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper blue-grey lighten-4">
+            <div class="col s12">
+                <a href="/" class="breadcrumb blue-grey-text text-darken-3">Home</a>
+                <a href="{% url 'base:author_details' book.author.slug %}"
+                   class="breadcrumb blue-grey-text text-darken-3">{{ book.author.name|truncatewords:3 }}</a>
+                <a href="{% url 'base:book_details' book.slug %}"
+                   class="breadcrumb blue-grey-text text-darken-3">{{ book.name|truncatewords:3 }}</a>
+
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+
+            <h2 class="genres">{{ book }}</h2>
+
+            <div class="col m6 action-icons hide-on-small-only">
+                <i class="material-icons right bookmark" style="margin-top: -47px">bookmark_border</i>
+                <i class="material-icons right share" style="margin-top: -47px; margin-right: 27px;">share</i>
+                <i class="material-icons right favorite"
+                   style="margin-top: -47px; margin-right: 54px">favorite_border</i>
+            </div>
+
+
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab col s3"><a class="blue-grey-text text-darken-1 active" href="#books">name</a>
+                        </li>
+                        <li class="tab col s3"><a class="blue-grey-text text-darken-1" href="#files">Download</a></li>
+                        <li class="tab col s3"><a class="blue-grey-text text-darken-1" href="#comments">comments</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div id="books" class="col s12">
+                    <div class="row valign-wrapper">
+                        <div class="card-panel">
+                            <div class="col s3 m3 hide-on-small-only">
+                                <img src="{{ book.image.url }}">
+                                {% for genre in book.author.get_genre %}
+                                    <b>Genre: </b><a href="{% url 'base:genre_details' genre.slug %}">{{ genre }}</a>
+                                {% endfor %}
+                                <br>
+                                <b>Author: </b><a href="{% url 'base:author_details' book.author.slug %}">{{ book.author }}</a>
+                            </div>
+                            <div class="col s9 m9">
+                                <p>{{ book.description|safe }}</p>
+                            </div>
+                            <a href="{% url 'base:register_book' book.slug %}" class="btn right">Save</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="files" class="col s12">
+                    <h4 class="genres">files</h4>
+                    {% for attachment in book.attachment_files.all %}
+                        <div class="row center">
+                            <a href="{{ attachment.file.url }}">
+                                <div class="col m6 s12 offset-m3">
+                                    <div class="card-panel {{ attachment.color }} white-text" style="padding: 10px 10px">
+                                        <span class="attachment-files valign-wrapper">{{ attachment.name|truncatechars:40 }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div id="comments" class="col s12">
+                    <div class="section">
+                        <div class="row">
+                            <h4 class="genres">Comments</h4>
+                            <div class="col s12">
+                                <div class="card-panel" style="padding: 15px 24px">
+                                    <div class="row">
+                                        <div class="">
+                                            <div class="col m2">
+                                                <img class="comment-user hide-on-small-only" src="fantasy.jpg">
+                                                <div style="font-size: 12px"><i>Faez</i></div>
+                                            </div>
+                                            <div class="col m10 s12">
+                                <span class="comment-action">
+                                    <a class="right grey-text tooltipped like" data-position="top" data-tooltip="like"
+                                       href=""><i class="material-icons dislike">thumb_up</i></a>
+                                    <a class="right grey-text tooltipped" data-position="top" data-tooltip="dislike"
+                                       href=""><i class="material-icons">thumb_down</i></a>
+                                    <a class="right grey-text tooltipped modal-trigger" href="#comment-modal"
+                                       data-position="top" data-tooltip="reply"
+                                       href=""><i class="material-icons">reply</i></a>
+                                </span>
+                                                <p>hello A modern responsive front-end framework based on Material
+                                                    DesignA
+                                                    modern
+                                                    responsive front-end framework based on Material DesignA modern
+                                                    responsive
+                                                    front-end
+                                                    framework based on Material DesignA modern responsive front-end
+                                                    framework
+                                                    based
+                                                    on
+                                                    Material Design.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s11 right">
+                                <div class="card-panel" style="padding: 15px 24px">
+                                    <div class="row">
+                                        <div class="">
+                                            <div class="col m2">
+                                                <img class="comment-user hide-on-small-only" src="fantasy.jpg">
+                                                <div style="font-size: 12px"><i>Faez</i></div>
+                                            </div>
+                                            <div class="col m10 s12">
+                                <span class="comment-action">
+                                    <a class="right grey-text tooltipped like" data-position="top" data-tooltip="like"
+                                       href=""><i class="material-icons dislike">thumb_up</i></a>
+                                    <a class="right grey-text tooltipped" data-position="top" data-tooltip="dislike"
+                                       href=""><i class="material-icons">thumb_down</i></a>
+                                </span>
+                                                <p>hello A modern responsive front-end framework based on Material
+                                                    DesignA
+                                                    modern
+                                                    responsive front-end framework based on Material DesignA modern
+                                                    responsive
+                                                    front-end
+                                                    framework based on Material DesignA modern responsive front-end
+                                                    framework
+                                                    based
+                                                    on
+                                                    Material Design.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <a class="btn modal-trigger" href="#comment-modal">comment</a>
+                            <!-- Modal comment -->
+                            <div id="comment-modal" class="modal">
+                                <div class="modal-content">
+                                    <h4 class="comment-icon">Comment</h4>
+
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                    <label for="textarea1">Your comment</label>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Comment</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <h4 class="genres">Recommended authors</h4>
+            <div class="row">
+                {% for author in authors %}
+                    {% include '../base/author_card.html' %}
+                {% endfor %}
+            </div>
+            <a href="#"><span class="more">more...</span></a>
+
+
+            <h4 class="genres">Other books</h4>
+            <div class="row">
+                {% for book in books %}
+                    {% include "../base/book_card.html" %}
+                {% endfor %}
+            </div>
+            <a href="#"><span class="more">more...</span></a>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.tabs').tabs();
+
+            $('.bookmark').on('click', function () {
+                if ($(this).text() == 'bookmark') {
+                    $(this).text('bookmark_border')
+                } else {
+                    $(this).text('bookmark')
+                }
+            });
+
+            $('.share').on('click', function () {
+                $(this).css('color', '#0D47A1')
+            });
+
+            $('.favorite').on('click', function () {
+                if ($(this).text() == 'favorite') {
+                    $(this).text('favorite_border')
+                    $(this).css('color', '#000')
+
+                } else {
+                    $(this).text('favorite')
+                    $(this).css('color', '#d81b60')
+                }
+            });
+        });
+    </script>
+{% endblock %}

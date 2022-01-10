@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Authors{% endblock %}
+
+{% block breadcrumb %}
+    <nav>
+        <div class="nav-wrapper blue-grey lighten-4">
+            <div class="col s12">
+                <a href="/" class="breadcrumb blue-grey-text text-darken-3">Home</a>
+                <a href="{% url 'base:genres' %}" class="breadcrumb blue-grey-text text-darken-3">Genres</a>
+                <a href="{% url 'base:authors' %}" class="breadcrumb blue-grey-text text-darken-3">Authors</a>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <h4 class="genres">Authors</h4>
+                {% for author in authors %}
+                    {% include 'base/author_card.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+            <h4 class="genres">Top books</h4>
+            <div class="row">
+                {% for book in books %}
+                    {% include 'base/book_card.html' %}
+                {% endfor %}
+            </div>
+            <a href="#"><span class="more">more...</span></a>
+
+            <h4 class="genres">Top genres</h4>
+            <div class="row">
+                {% for genre in genres %}
+                    {% include 'base/genre_card.html' %}
+                {% endfor %}
+            </div>
+            <a href="#"><span class="more">more...</span></a>
+        </div>
+
+        <div class="section">
+            <div class="row">
+                <h4 class="genres">Comments</h4>
+                <div class="col s12">
+                    <div class="card-panel" style="padding: 15px 24px">
+                        <div class="row">
+                            <div class="">
+                                <div class="col m2">
+                                    <img class="comment-user hide-on-small-only" src="{% static 'fantasy.jpg' %}">
+                                    <div style="font-size: 12px"><i>Faez</i></div>
+                                </div>
+                                <div class="col m10 s12">
+                                <span class="comment-action">
+                                    <a class="right grey-text tooltipped like" data-position="top" data-tooltip="like"
+                                       href=""><i class="material-icons dislike">thumb_up</i></a>
+                                    <a class="right grey-text tooltipped" data-position="top" data-tooltip="dislike"
+                                       href=""><i class="material-icons">thumb_down</i></a>
+                                    <a class="right grey-text tooltipped modal-trigger" href="#comment-modal"
+                                       data-position="top" data-tooltip="reply"
+                                       href=""><i class="material-icons">reply</i></a>
+                                </span>
+                                    <p>hello A modern responsive front-end framework based on Material DesignA modern
+                                        responsive front-end framework based on Material DesignA modern responsive
+                                        front-end
+                                        framework based on Material DesignA modern responsive front-end framework based
+                                        on
+                                        Material Design.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s11 right">
+                    <div class="card-panel" style="padding: 15px 24px">
+                        <div class="row">
+                            <div class="">
+                                <div class="col m2">
+                                    <img class="comment-user hide-on-small-only" src="{% static 'fantasy.jpg' %}">
+                                    <div style="font-size: 12px"><i>Faez</i></div>
+                                </div>
+                                <div class="col m10 s12">
+                                <span class="comment-action">
+                                    <a class="right grey-text tooltipped like" data-position="top" data-tooltip="like"
+                                       href=""><i class="material-icons dislike">thumb_up</i></a>
+                                    <a class="right grey-text tooltipped" data-position="top" data-tooltip="dislike"
+                                       href=""><i class="material-icons">thumb_down</i></a>
+                                </span>
+                                    <p>hello A modern responsive front-end framework based on Material DesignA modern
+                                        responsive front-end framework based on Material DesignA modern responsive
+                                        front-end
+                                        framework based on Material DesignA modern responsive front-end framework based
+                                        on
+                                        Material Design.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <a class="btn modal-trigger" href="#comment-modal">comment</a>
+                <!-- Modal comment -->
+                <div id="comment-modal" class="modal">
+                    <div class="modal-content">
+                        <h4 class="comment-icon">Comment</h4>
+
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Your comment</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Comment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <h4 class="genres">Comments</h4>
+                <div class="col s12">
+                    <div class="card-panel" style="padding: 15px 24px">
+                        <div class="row">
+                            <div class="">
+                                <div class="col m2">
+                                    <img class="comment-user hide-on-small-only" src="fantasy.jpg">
+                                    <div style="font-size: 12px"><i>Faez</i></div>
+                                </div>
+                                <div class="col m10 s12">
+                                <span class="comment-action">
+                                    <a class="right grey-text tooltipped like" data-position="top" data-tooltip="like"
+                                       href=""><i class="material-icons dislike">thumb_up</i></a>
+                                    <a class="right grey-text tooltipped" data-position="top" data-tooltip="dislike"
+                                       href=""><i class="material-icons">thumb_down</i></a>
+                                    <a class="right grey-text tooltipped modal-trigger" href="#comment-modal"
+                                       data-position="top" data-tooltip="reply"
+                                       href=""><i class="material-icons">reply</i></a>
+                                </span>
+                                    <p>hello A modern responsive front-end framework based on Material DesignA
+                                        modern
+                                        responsive front-end framework based on Material DesignA modern responsive
+                                        front-end
+                                        framework based on Material DesignA modern responsive front-end framework
+                                        based
+                                        on
+                                        Material Design.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s11 right">
+                    <div class="card-panel" style="padding: 15px 24px">
+                        <div class="row">
+                            <div class="">
+                                <div class="col m2">
+                                    <img class="comment-user hide-on-small-only" src="fantasy.jpg">
+                                    <div style="font-size: 12px"><i>Faez</i></div>
+                                </div>
+                                <div class="col m10 s12">
+                                <span class="comment-action">
+                                    <a class="right grey-text tooltipped like" data-position="top" data-tooltip="like"
+                                       href=""><i class="material-icons dislike">thumb_up</i></a>
+                                    <a class="right grey-text tooltipped" data-position="top" data-tooltip="dislike"
+                                       href=""><i class="material-icons">thumb_down</i></a>
+                                </span>
+                                    <p>hello A modern responsive front-end framework based on Material DesignA
+                                        modern
+                                        responsive front-end framework based on Material DesignA modern responsive
+                                        front-end
+                                        framework based on Material DesignA modern responsive front-end framework
+                                        based
+                                        on
+                                        Material Design.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <a class="btn modal-trigger" href="#comment-modal">comment</a>
+                <!-- Modal comment -->
+                <div id="comment-modal" class="modal">
+                    <div class="modal-content">
+                        <h4 class="comment-icon">Comment</h4>
+
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Your comment</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Comment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

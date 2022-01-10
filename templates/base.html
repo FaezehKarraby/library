@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block  title %}
+        Home
+    {% endblock %}</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+
+<body>
+
+{% include 'base/nav.html' %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+
+<div class="parallax-container valign-wrapper">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <div class="col s1 m1">
+                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+            </div>
+        </div>
+    </div>
+    <div class="parallax"><img src="{% static 'ciberspace.jpg' %}" alt="Unsplashed background img 3"></div>
+</div>
+
+{% include 'base/footer.html' %}
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+{% block script %}
+{% endblock %}
+</body>
+</html>
+
+</body>
+</html>

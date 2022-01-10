@@ -1,0 +1,16 @@
+<div class="col s12 m4">
+    <div class="card">
+        <div class="card-image">
+            <img src="{{ author.image.url }}">
+        </div>
+        <div class="card-content">
+
+            <span class="card-title"><a href="{% url 'base:author_details' author.slug %}">{{ author|truncatewords:3 }}</a> </span>
+            <p>{{ author.description|truncatechars:70 }}</p>
+
+        </div>
+        <div class="card-action">
+            <a href="#">more...</a>
+        </div>
+    </div>
+</div>

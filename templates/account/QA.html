@@ -1,0 +1,160 @@
+{% extends 'account/dashboard.html' %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col m10 s8">
+                    <h4 class="genres hide-on-small-only" style="font-size: 30px"><i class="material-icons nav-icon"
+                                                                                     style="font-size: 27px">question_answer</i>Your
+                        questions</h4>
+                    <h4 class="genres hide-on-med-and-up" style="font-size: 23px"><i class="material-icons nav-icon"
+                                                                                     style="font-size: 21px">question_answer</i>Your
+                        questions</h4>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="hide-on-small-only">
+            {% for chat in chats %}
+                <!--user question-->
+                {% if chat.is_customer %}
+                    <div class="row">
+                    <div class="col s11">
+                        <div class="card-panel blue-grey lighten-4">
+                            <div style="font-size: 16px"><i>{{ chat.user }}</i></div>
+                            <p>{{ chat.message }}</p>
+                            <hr>
+                            <div class="valign-wrapper blue-grey-text" style="font-size: 13px"><i id="msg-{{ chat.id }}"
+                                                                                                  data-msg-num="{{ chat.id }}"
+                                                                                                  data-seen="{{ chat.seen }}"
+                                                                                                  class="material-icons"
+                                                                                                  style="font-size: 16px">{% if chat.seen %}done_all{% else %}check{% endif %}</i>{{ chat.created_datetime_jd }}
+                            </div>
+
+                        </div>
+                    </div>
+                {% else %}
+
+                    <!--admin answer-->
+                    <div class="row">
+                        <div class="col s11 offset-s1">
+                            <div class="card-panel blue-grey lighten-3">
+                                <div style="font-size: 16px"><i>{{ chat.user }}</i></div>
+                                <p>{{ chat.message }}</p>
+                                <hr>
+                                <div class="valign-wrapper blue-grey-text" style="font-size: 13px">
+                                    {{ chat.created_datetime_jd }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            </div>
+
+            <div class="hide-on-med-and-up">
+                {% for chat in chats %}
+                    <!--user question-->
+                    {% if chat.is_customer %}
+                        <div class="row">
+                            <div class="col s11">
+                                <div class="card-panel blue-grey lighten-4">
+                                    <div style="font-size: 12px"><i><b>{{ chat.user }}</b></i></div>
+                                    <p style="font-size: 11px">{{ chat.message }}</p>
+                                    <hr>
+                                    <div class="valign-wrapper blue-grey-text" style="font-size: 10px"><i
+                                            id="msg-{{ chat.id }}" data-msg-num="{{ chat.id }}"
+                                            data-seen="{{ chat.seen }}"
+                                            class="material-icons blue-grey-text"
+                                            style="font-size: 12px">{% if chat.seen %}done_all{% else %}check{% endif %}</i>{{ chat.created_datetime }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <!--admin answer-->
+                        <div class="row">
+                            <div class="col s11 offset-s1">
+                                <div class="card-panel blue-grey lighten-3">
+                                    <div style="font-size: 12px"><i><b>{{ chat.user }}</b></i></div>
+                                    <p style="font-size: 11px">{{ chat.message }}</p>
+                                    <hr>
+                                    <div class="valign-wrapper blue-grey-text" style="font-size: 10px"><i
+                                            class="material-icons blue-grey-text" style="font-size: 12px"></i>at
+                                        {{ chat.created_datetime }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col m2">
+
+                    <div style="font-size: 16px">plz ask me...</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="MyID" class="materialize-textarea"></textarea>
+                    <label for="textarea1"></label>
+                    <button class="btn" type="submit">Send</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+<!--markdown script-->
+{% block script %}
+    {{ block.super }}
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script>
+        var simplemde = new SimpleMDE({element: $(".MyID")[0]});
+        simplemde.value("This text will appear in the editor");
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                $.each($('[id^="msg-"]'), function () {
+                    var top_of_element = $(this).offset().top;
+                    var bottom_of_element = $(this).offset().top + $(this).outerHeight();
+                    var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+                    var top_of_screen = $(window).scrollTop();
+
+                    if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)) {
+                        if ($(this).data('seen') === 'False') {
+                            msg_elem = $(this)
+                            $.get(
+                                "{% url 'chat:chane_seen_status' %}",
+                                {'msg_id': $(this).data('msg-num')},
+                                function (data, status) {
+                                    console.log(data, status)
+                                    if (status === 'success') {
+                                        setTimeout(function () {
+                                            msg_elem.addClass('flash');
+                                            msg_elem.text('done_all');
+                                            $(this).css({'color': '#263238', 'font-size': '120%'});
+                                        }, 1500);
+                                    }
+                                });
+                            $(this).data('seen', 'True');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col m6 offset-m3">
+                    <div class="card-panel">
+
+
+                        <h4 class="genres">Sign Up</h4>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row profile-icon-color">
+                                <div class="input-field col m12 s12">
+                                    <i class="material-icons prefix">account_box</i>
+                                    <input type="text" name="username"
+                                           maxlength="100" autofocus=""
+                                           required="" id="id_username">
+                                    <label for="id_username" class="">Username</label>
+                                </div>
+                                <div class="input-field col m12 s12">
+                                    <i class="material-icons prefix">mail</i>
+                                    <input type="email" name="email" required=""
+                                           id="id_email">
+                                    <label for="id_email">Email</label>
+                                </div>
+                                <div class="input-field col m12 s12">
+                                    <i class="material-icons prefix">key</i>
+                                    <input type="password" name="password1"
+                                           autocomplete="new-password" required=""
+                                           id="id_password1"> <span
+                                        class="helptext"></span>
+                                    <label for="id_password1">Password</label>
+                                </div>
+                                <div class="input-field col m12 s12">
+                                    <i class="material-icons prefix">key</i>
+                                    <input type="password"
+                                           name="password2"
+                                           autocomplete="new-password"
+                                           required=""
+                                           id="id_password2"> <span
+                                        class="helptext">Enter the same password as before, for verification.</span>
+                                    <label for="id_password2">Password confirmation</label>
+                                </div>
+                                <button type="submit" class="btn waves-effect waves-light">Sign Up</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'account/dashboard.html' %}
+{% load static %}
+
+{% block title %}My books{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <h4 class="genres">Saved</h4>
+                {% for book in register_books %}
+                    {% include 'base/book_card.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ block.super }}
+    $('select').formSelect();
+    </script>
+{% endblock %}

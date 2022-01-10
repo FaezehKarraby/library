@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}Dashbord{% endblock %}</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <link href="{% static 'css/animate.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/animate.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+</head>
+<body>
+<main>
+    {% include 'base/nav.html' %}
+
+    <!---->
+    <ul id="sidenav-1" class="sidenav sidenav-fixed">
+        <li>
+            <div class="row user-view">
+                <div class="background">
+                    <img src="nav_poster.jpg">
+                </div>
+                <a href="#user"><img class="circle" src="{{ request.image.url }}"></a>
+                <!--<a href="#name"><span class="grey-text text-darken-4 name">{{ request.user }}</span></a>-->
+                <a href="#email"><span class="grey-text text-darken-4 email">{{ request.user.email }}</span></a>
+            </div>
+        </li>
+
+        <li><a class="waves-effect" href="#"><i class="material-icons nav-icon">local_library</i>Profile</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+        <li><a class="waves-effect" href="#!"><i class="material-icons nav-icon">bookmark</i>Saved</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+        <li><a class="waves-effect" href="{% url 'account:my_books' id=user.id %}"><i class="material-icons nav-icon">import_contacts</i>My
+            book</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+        <li><a class="waves-effect" href="#!"><i class="material-icons nav-icon">collections_bookmark</i>My
+            books</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+
+        <li><a class="waves-effect" href="{% url 'chat:qa' %}"><i class="material-icons nav-icon">contact_mail</i>Contact with admin</a>
+        </li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+
+        <li><a class="waves-effect" href="#!"><i class="material-icons nav-icon">settings</i>Settings</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+
+        <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
+    <!---->
+
+    <!--messages-->
+    <div class="container">
+    </div>
+
+    {% block content %}{% endblock %}
+
+
+    <div class="parallax-container valign-wrapper">
+        <div class="section no-pad-bot">
+            <div class="container">
+                <div class="col s1 m1">
+                    <h5 class="header col s12 light">A modern responsive front-end framework based on Material
+                        Design</h5>
+                </div>
+            </div>
+        </div>
+        <div class="parallax"><img src="{% static 'ciberspace.jpg' %}" alt="Unsplashed background img 3"></div>
+    </div>
+</main>
+
+{% include 'base/footer.html' %}
+
+<!--  Scripts-->
+
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+<script type="text/javascript">
+    {% if messages %}
+        {% for message in messages %}
+            var toastHTML = `
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important:{% endif %}
+                {{ message }}
+                <button class="btn-flat toast-action">
+                {% if message.tags == 'success' %}
+                <i class="material-icons">check</i>
+                {% elif message.tags == 'error'%}
+                <i class="material-icons">close</i>
+                {% else %}
+                <i class="material-icons">error</i>
+                {% endif %}
+                </button>`
+            M.toast({html: toastHTML, displayLength: 5000});
+        {% endfor %}
+    {% endif %}
+
+</script>
+{% block script %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+            $('#sidenav-1').sidenav({edge: 'left'});
+            $('#sidenav-2').sidenav({edge: 'right'});
+        });
+    </script>
+{% endblock %}
+</body>
+</html>
+

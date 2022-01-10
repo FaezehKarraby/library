@@ -1,0 +1,14 @@
+<div class="row center">
+    <div class="card-panel {{ attachment.color }} white-text" style="padding: 10px 10px">
+        <span class="attachment-files valign-wrapper">{{ attachment.name|truncatechars:40 }}</span>
+    </div>
+    <a href="{{ attachment.file.url }}">
+        <div class="col m6 s12 offset-m3">
+        </div>
+    </a>
+</div>
+<div id="files" class="col s12">
+    <h4 class="genres">files</h4>
+    {% for attachment in book.attachment_files.all %}
+        xxxxxxxxxxxxxxxxxxxxxxxxx
+    {% endfor %}

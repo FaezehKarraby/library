@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col m6 offset-m3">
+                    <div class="card-panel">
+
+                        <h4 class="genres">Login</h4>
+                        <form method="post">
+                            {% csrf_token %}
+
+                            <div class="row profile-icon-color">
+
+                                <div class="input-field col m12 s12">
+                                    <i class="material-icons prefix">account_box</i>
+                                    <input type="text" name="username"
+                                       autofocus=""
+                                       autocapitalize="none"
+                                       autocomplete="username"
+                                       maxlength="150" required=""
+                                       id="id_username">
+                                    <label for="id_username">Username</label>
+                                </div>
+
+                                <div class="input-field col m12 s12">
+                                    <i class="material-icons prefix">key</i>
+                                    <input type="password" name="password"
+                                           autocomplete="current-password"
+                                           required="" id="id_password">
+                                    <label for="id_password">Password</label>
+                                </div>
+
+                            </div>
+
+                            <button class="col m6 offset-m3 s6 offset-s3 btn waves-effect waves-light" type="submit">Login</button>
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
