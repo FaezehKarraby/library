@@ -296,3 +296,7 @@ header, main, footer {
 .tabs .tab a:focus, .tabs .tab a:focus.active{
     background-color: #eceff1;
 }
+
+.breadcrumb::before {
+    color: #37474f;
+}
