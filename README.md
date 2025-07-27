@@ -21,7 +21,8 @@
 
     python manage.py migrate
     python manage.py runserver
-🛠️ تکنولوژی های استفاده شده    
+🛠️ تکنولوژی های استفاده شده
+
 •	Python 3.x  
 •	Django 4.x  
 •	SQLite  
