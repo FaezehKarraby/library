@@ -9,11 +9,11 @@
 1.	۱. کلون کردن مخزن:  
 
     git clone https://github.com/FaezehKarraby/library.git
-    cd library
+    cd library  
 2.	۲. ایجاد محیط مجازی و فعالسازی:  
 
     python -m venv venv
-    source venv/bin/activate  (در ویندوز: venv\Scripts\activate)
+    source venv/bin/activate  (در ویندوز: venv\Scripts\activate)  
 3.	۳. نصب کتابخانه های موردنیاز:  
 
     pip install -r requirements.txt
@@ -22,6 +22,7 @@
     python manage.py migrate
     python manage.py runserver
 🛠️ تکنولوژی های استفاده شده
+
 
 •	Python 3.x  
 •	Django 4.x  
